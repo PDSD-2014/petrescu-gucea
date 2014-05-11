@@ -49,7 +49,12 @@
 
     </GridLayout>
 
-  
+  	 <Button
+        android:id="@+id/ButStartGame"
+        android:layout_width="285dp"
+        android:layout_height="67dp"
+        android:onClick="sendMessage"
+        android:text="START GAME" />
 
 </LinearLayout>
 
