@@ -22,7 +22,7 @@
          android:layout_height="wrap_content"
          android:layout_marginLeft="50dp"
          android:text="@string/your_turn"
-         android:textColor="#FFFFFF"
+         android:textColor="#000000"
          android:textSize="20sp" />
      
      </LinearLayout>
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="1" 
-    		android:paddingBottom="5dp"
+    		android:paddingBottom="1dp"
     		android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
     		android:paddingTop="@dimen/activity_vertical_margin">
@@ -98,10 +98,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="1" 
-    		android:paddingBottom="5dp"
+    		android:paddingBottom="1dp"
     		android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
-    		android:paddingTop="5dp">
+    		android:paddingTop="1dp">
 
             <Button
                 android:id="@+id/but7"
@@ -156,10 +156,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="1" 
-    		android:paddingBottom="5dp"
+    		android:paddingBottom="1dp"
     		android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
-    		android:paddingTop="5dp">
+    		android:paddingTop="1dp">
 
             <Button
                 android:id="@+id/but13"
@@ -214,10 +214,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="1" 
-    		android:paddingBottom="5dp"
+    		android:paddingBottom="1dp"
     		android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
-    		android:paddingTop="5dp">
+    		android:paddingTop="1dp">
 
             <Button
                 android:id="@+id/but19"
@@ -272,10 +272,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="1" 
-    		android:paddingBottom="5dp"
+    		android:paddingBottom="1dp"
     		android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
-    		android:paddingTop="5dp">
+    		android:paddingTop="1dp">
 
             <Button
                 android:id="@+id/but25"
@@ -330,10 +330,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="1" 
-    		android:paddingBottom="5dp"
+    		android:paddingBottom="1dp"
     		android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
-    		android:paddingTop="5dp">
+    		android:paddingTop="1dp">
 
             <Button
                 android:id="@+id/but31"
@@ -381,27 +381,41 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but31"
                 android:layout_toRightOf="@+id/but35"/>
-
-        </RelativeLayout>
+		</RelativeLayout>
+            
+         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="1" 
+    		android:paddingBottom="5dp"
+    		android:paddingLeft="@dimen/activity_horizontal_margin"
+    		android:paddingRight="@dimen/activity_horizontal_margin"
+    		android:paddingTop="5dp">
+    		
+            <TextView
+        		android:id="@+id/scor_juc"
+        	 	android:layout_width="200dp"
+         		android:layout_height="wrap_content"
+         		android:layout_marginLeft="50dp"
+         		android:text="@string/your_score"
+         		android:textColor="#000000"
+         		android:textSize="20sp"
+         		android:layout_gravity="left" />
+     
+    		<TextView
+		        android:id="@+id/scor_opp"
+		        android:layout_width="200dp"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="50dp"
+		        android:text="@string/opp_score"
+		        android:textColor="#000000"
+         		android:textSize="20sp"
+         		android:layout_gravity="left"
+         		android:layout_below="@+id/scor_juc" />
+     	</RelativeLayout>
        
-     <TextView
-         android:id="@+id/scor_juc"
-         android:layout_width="200dp"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="50dp"
-         android:text="@string/your_score"
-         android:textColor="#FFFFFF"
-         android:textSize="20sp" />
      
-     <TextView
-         android:id="@+id/scor_opp"
-         android:layout_width="200dp"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="50dp"
-         android:text="@string/opp_score"
-         android:textColor="#FFFFFF"
-         android:textSize="20sp" />
-     
+         
      </LinearLayout>
      
 </FrameLayout>

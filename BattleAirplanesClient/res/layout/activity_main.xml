@@ -23,7 +23,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
         android:text="@string/Team"
-        android:textColor="#FFFF00"
+        android:textColor="#0000FF"
+        android:textColorLink="#0000FF"
         android:textSize="20sp" />
 
     <GridLayout
@@ -36,34 +37,36 @@
 
         <Space />
 
-        <Space />
-
         <TextView
             android:id="@+id/MessageToEntertext"
-            android:layout_width="201dp"
+            android:layout_width="288dp"
             android:layout_height="wrap_content"
             android:layout_column="1"
-            android:layout_gravity="center"
-            android:layout_row="4"
+            android:layout_gravity="right|top"
+            android:layout_row="5"
             android:text="@string/opponent_ip_complete_message"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColorLink="#0000FF"
+            android:textSize="14sp" />
+        
         <EditText
             android:id="@+id/TextIpFriend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_gravity="left|top"
-            android:layout_row="6"
+            android:layout_row="7"
             android:ems="10"
             android:hint="IP of your friend." />
+
+        
     </GridLayout>
 
     <Button
         android:id="@+id/ButStartGame"
         android:layout_width="285dp"
-        android:layout_height="100dp"
-        android:text="START GAME"
-        android:onClick="sendMessage" />
+        android:layout_height="67dp"
+        android:onClick="sendMessage"
+        android:text="START GAME" />
 
 </LinearLayout>
