@@ -63,6 +63,7 @@
         android:id="@+id/ButStartGame"
         android:layout_width="285dp"
         android:layout_height="100dp"
-        android:text="START GAME" />
+        android:text="START GAME"
+        android:onClick="sendMessage" />
 
 </LinearLayout>
