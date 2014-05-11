@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.battleairplanesserver.GameActivity"
+            android:label="@string/title_activity_game" >
+        </activity>
+        <activity
+            android:name="com.example.battleairplanesserver.GameOverActivity"
+            android:label="@string/title_activity_game_over" >
+        </activity>
     </application>
 
 </manifest>
