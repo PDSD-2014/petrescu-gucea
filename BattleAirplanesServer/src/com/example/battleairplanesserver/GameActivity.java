@@ -48,7 +48,7 @@ public class GameActivity extends Activity {
 		    	extras.remove("newGame");
 		    	myPlane = new ArrayList<Integer>();
 		    	while (true) {
-		    		Integer newPosition = randInt(0, 36);
+		    		Integer newPosition = randInt(1, 36);
 		    		if (myPlane.contains(newPosition) == false)
 		    			myPlane.add(newPosition);
 		    		if (myPlane.size() == 6)
@@ -86,7 +86,17 @@ public class GameActivity extends Activity {
 		}
 	}
 	
-	private void enableButtons() {
+	private void enableAllButtons() {
+		for (Integer i = 1; i < 37; i++) {
+			int id = getResources().getIdentifier("but".concat(i.toString()), "id", getPackageName());
+    		Button but = (Button)findViewById(id);
+    		but.setEnabled(true);
+    		TextView turn = (TextView)findViewById(R.id.TextTeam);
+	    	turn.setText("Your turn");
+		}
+	}
+	
+	private void enableSomeButtons() {
 		for (Integer i = 1; i < 37; i++) {
 			int id = getResources().getIdentifier("but".concat(i.toString()), "id", getPackageName());
     		Button but = (Button)findViewById(id);
@@ -228,7 +238,7 @@ public class GameActivity extends Activity {
 			Button but = (Button)findViewById(id);
 			String action = progress[0];
 			if (action.equals("M")) {
-				enableButtons();
+				enableSomeButtons();
 			}
 			else {
 				but.setBackgroundColor(Color.RED);

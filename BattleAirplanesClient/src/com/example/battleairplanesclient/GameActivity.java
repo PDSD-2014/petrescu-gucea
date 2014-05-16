@@ -49,7 +49,7 @@ public class GameActivity extends Activity {
 		    	extras.remove("newGame");
 		    	myPlane = new ArrayList<Integer>();
 		    	while (true) {
-		    		Integer newPosition = randInt(0, 36);
+		    		Integer newPosition = randInt(1, 36);
 		    		if (myPlane.contains(newPosition) == false)
 		    			myPlane.add(newPosition);
 		    		if (myPlane.size() == 6)
@@ -68,7 +68,7 @@ public class GameActivity extends Activity {
 		    	TextView oScore = (TextView)findViewById(R.id.scor_opp);
 		    	oScore.setText("Oponnent Score: 0");
 		    	
-		    	enableButtons();
+		    	enableAllButtons();
 		    }
 		}
 		
@@ -125,7 +125,15 @@ public class GameActivity extends Activity {
 		}
 	}
 	
-	private void enableButtons() {
+	private void enableAllButtons() {
+		for (Integer i = 1; i < 37; i++) {
+			int id = getResources().getIdentifier("but".concat(i.toString()), "id", getPackageName());
+    		Button but = (Button)findViewById(id);
+    		but.setEnabled(true);
+		}
+	}
+	
+	private void enableSomeButtons() {
 		for (Integer i = 1; i < 37; i++) {
 			int id = getResources().getIdentifier("but".concat(i.toString()), "id", getPackageName());
     		Button but = (Button)findViewById(id);
@@ -144,7 +152,7 @@ public class GameActivity extends Activity {
 		int id = getResources().getIdentifier("but".concat(idBut), "id", getPackageName());
 		Button but = (Button)findViewById(id);
 		pushedButtons.add(id);
-		but.setEnabled(false);
+		//but.setEnabled(false);
 		
 		if (serverPlane.contains(Integer.parseInt(idBut)) == true) {
 			if (myPlane.contains(Integer.parseInt(idBut))) 
@@ -207,7 +215,7 @@ public class GameActivity extends Activity {
 		protected void onProgressUpdate(String... progress) {
 			String action = progress[0];
 			if (action.equals("M")) {
-				enableButtons();
+				enableSomeButtons();
 				TextView turn = (TextView)findViewById(R.id.TextTeam);
 		    	turn.setText("Your turn");
 			}
