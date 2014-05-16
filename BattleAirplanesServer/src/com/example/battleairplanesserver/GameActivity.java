@@ -26,6 +26,7 @@ import android.widget.TextView;
 public class GameActivity extends Activity {
 	List<Integer> myPlane;
 	List<Integer> clientPlane;
+	List<Integer> pushedButtons;
 	private boolean myTurn = true;
 	private Integer myScore = 0;
 	private Integer clientScore = 0;
@@ -89,7 +90,8 @@ public class GameActivity extends Activity {
 		for (Integer i = 1; i < 37; i++) {
 			int id = getResources().getIdentifier("but".concat(i.toString()), "id", getPackageName());
     		Button but = (Button)findViewById(id);
-    		but.setEnabled(true);
+    		if(!pushedButtons.contains(id))
+    			but.setEnabled(true);
     		TextView turn = (TextView)findViewById(R.id.TextTeam);
 	    	turn.setText("Your turn");
 		}
@@ -104,6 +106,8 @@ public class GameActivity extends Activity {
 		
 		int id = getResources().getIdentifier("but".concat(idBut), "id", getPackageName());
 		Button but = (Button)findViewById(id);
+		pushedButtons.add(id);
+		
 		if (clientPlane.contains(Integer.parseInt(idBut)) == true) {
 			if (myPlane.contains(Integer.parseInt(idBut))) 
 				but.setText("|H|");
