@@ -20,7 +20,6 @@
          android:id="@+id/TextTeam"
          android:layout_width="174dp"
          android:layout_height="wrap_content"
-         android:layout_marginLeft="50dp"
          android:text="@string/your_turn"
          android:textColor="#000000"
          android:textSize="20sp" />
@@ -50,6 +49,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="hit"
                 android:layout_gravity="left|top" />
 
             <Button
@@ -58,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but1"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but1"/>
             
             <Button
@@ -66,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but1"
+                 android:onClick="hit"
                 android:layout_toRightOf="@+id/but2"/>
             
             <Button
@@ -74,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but1"
+                 android:onClick="hit"
                 android:layout_toRightOf="@+id/but3"/>
             
             <Button
@@ -82,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but1"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but4"/>
             
             <Button
@@ -90,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but1"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but5"/>
 
         </RelativeLayout>
@@ -108,6 +113,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="hit"
                 android:layout_gravity="left" />
 
             <Button
@@ -116,6 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but7"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but7"/>
             
             <Button
@@ -124,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but8"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but8"/>
             
             <Button
@@ -132,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but7"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but9"/>
             
             <Button
@@ -140,6 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but7"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but10"/>
             
             <Button
@@ -148,6 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but7"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but11"/>
 
         </RelativeLayout>
@@ -166,6 +177,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="hit"
                 android:layout_gravity="left" />
 
             <Button
@@ -174,6 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but13"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but13"/>
             
             <Button
@@ -182,6 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but13"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but14"/>
             
             <Button
@@ -190,6 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but13"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but15"/>
             
             <Button
@@ -198,6 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but13"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but16"/>
             
             <Button
@@ -206,6 +222,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but13"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but17"/>
 
         </RelativeLayout>
@@ -224,6 +241,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="hit"
                 android:layout_gravity="left" />
 
             <Button
@@ -232,6 +250,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but19"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but19"/>
             
             <Button
@@ -240,6 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but19"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but20"/>
             
             <Button
@@ -248,6 +268,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but19"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but21"/>
             
             <Button
@@ -256,6 +277,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but19"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but22"/>
             
             <Button
@@ -264,6 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but19"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but23"/>
 
         </RelativeLayout>
@@ -282,6 +305,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="hit"
                 android:layout_gravity="left" />
 
             <Button
@@ -290,6 +314,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but25"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but25"/>
             
             <Button
@@ -298,6 +323,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but25"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but26"/>
             
             <Button
@@ -306,6 +332,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but25"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but27"/>
             
             <Button
@@ -314,6 +341,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but25"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but28"/>
             
             <Button
@@ -322,6 +350,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but25"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but29"/>
 
         </RelativeLayout>
@@ -340,6 +369,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="hit"
                 android:layout_gravity="left" />
 
             <Button
@@ -348,6 +378,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but31"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but31"/>
             
             <Button
@@ -356,6 +387,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but31"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but32"/>
             
             <Button
@@ -364,6 +396,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but31"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but33"/>
             
             <Button
@@ -372,6 +405,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but31"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but34"/>
             
             <Button
@@ -380,6 +414,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/but31"
+                android:onClick="hit"
                 android:layout_toRightOf="@+id/but35"/>
 		</RelativeLayout>
             
@@ -396,7 +431,6 @@
         		android:id="@+id/scor_juc"
         	 	android:layout_width="200dp"
          		android:layout_height="wrap_content"
-         		android:layout_marginLeft="50dp"
          		android:text="@string/your_score"
          		android:textColor="#000000"
          		android:textSize="20sp"
@@ -406,7 +440,6 @@
 		        android:id="@+id/scor_opp"
 		        android:layout_width="200dp"
 		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="50dp"
 		        android:text="@string/opp_score"
 		        android:textColor="#000000"
          		android:textSize="20sp"

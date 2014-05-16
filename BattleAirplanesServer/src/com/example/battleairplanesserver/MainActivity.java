@@ -1,13 +1,11 @@
 package com.example.battleairplanesserver;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.Build;
 
 public class MainActivity extends Activity {
 	private Socket clientSocket;
@@ -30,7 +27,6 @@ public class MainActivity extends Activity {
 	private class WaitForClient extends AsyncTask<Void, Void, Void> {
 		private ServerSocket in;
 		private final static String TAG = "ServerThread";
-		OutputStream clientStream = null;
 		
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -44,7 +40,8 @@ public class MainActivity extends Activity {
 			try {
 				clientSocket = in.accept();
 					Log.d(TAG, "New request from: " + clientSocket.getInetAddress());
-					publishProgress(null);
+					SocketConnection.setSocket(clientSocket);
+					publishProgress((Void)null);
 			} catch (IOException e) {
 				Log.e(TAG, "Error when accepting connection");
 			}
@@ -74,6 +71,7 @@ public class MainActivity extends Activity {
 				return;
 			}
 			Intent intent = new Intent(this, GameActivity.class);
+			intent.putExtra("newGame", true);
 			startActivity(intent);
 		}
 		else {
@@ -116,6 +114,18 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public static class SocketConnection {
+		private static Socket serverSocket;
+		
+		public static Socket getSocket() {
+			return serverSocket;
+		}
+		
+		public static void setSocket(Socket socket) {
+			serverSocket = socket;
+		}
 	}
 
 	/**

@@ -37,12 +37,15 @@ public class MainActivity extends Activity {
 			try {
 				serverSocket = new Socket(editText.getText().toString(), 9000);
 				Log.e(TAG, "Connected to server");
+				SocketConnection.setSocket(serverSocket);
 				publishProgress(0);
 				
 				BufferedReader responseReader = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 				String line = responseReader.readLine();
 				Log.i(TAG, line);
 				Intent intent = new Intent(params[0], GameActivity.class);
+				
+				intent.putExtra("newGame", true);
 				startActivity(intent);
 				
 			} catch (UnknownHostException e) {
@@ -104,6 +107,18 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public static class SocketConnection {
+		private static Socket serverSocket;
+		
+		public static Socket getSocket() {
+			return serverSocket;
+		}
+		
+		public static void setSocket(Socket socket) {
+			serverSocket = socket;
+		}
+	}
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -124,9 +139,7 @@ public class MainActivity extends Activity {
 	
 	/** Called when the user clicks the Start Game button */
 	public void sendMessage(View view) {
-	    // Do something in response to button
-		
 		new ServerConnectThread().execute(this, null, null);
 	}
-
+	
 }
