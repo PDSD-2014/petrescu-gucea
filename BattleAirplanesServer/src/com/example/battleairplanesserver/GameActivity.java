@@ -69,6 +69,7 @@ public class GameActivity extends Activity {
 		    	oScore.setText("Oponnent Score: 0");
 		    	
 		    	disableButtons();
+		    	pushedButtons = new ArrayList<Integer>();
 		    }
 		}
 		
@@ -93,6 +94,7 @@ public class GameActivity extends Activity {
     		but.setEnabled(true);
     		TextView turn = (TextView)findViewById(R.id.TextTeam);
 	    	turn.setText("Your turn");
+	    	
 		}
 	}
 	
@@ -102,6 +104,8 @@ public class GameActivity extends Activity {
     		Button but = (Button)findViewById(id);
     		if(!pushedButtons.contains(id))
     			but.setEnabled(true);
+    		else
+    			but.setEnabled(false);
     		TextView turn = (TextView)findViewById(R.id.TextTeam);
 	    	turn.setText("Your turn");
 		}
@@ -117,6 +121,7 @@ public class GameActivity extends Activity {
 		int id = getResources().getIdentifier("but".concat(idBut), "id", getPackageName());
 		Button but = (Button)findViewById(id);
 		pushedButtons.add(id);
+		but.setEnabled(false);
 		
 		if (clientPlane.contains(Integer.parseInt(idBut)) == true) {
 			if (myPlane.contains(Integer.parseInt(idBut))) 
