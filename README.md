@@ -6,9 +6,10 @@ DONE:
 - Ecran joc;
 - Conectare server;
 - Implementare joc efectiv;
+- De adaugat niste efecte la Your Turn/Opponent turn
 
 TODO:
 
-1. De adaugat niste efecte la Your Turn/Opponent turn
-2. Comutare la ecran game over;
-3. ...
+
+ Comutare la ecran game over;
+ ...
