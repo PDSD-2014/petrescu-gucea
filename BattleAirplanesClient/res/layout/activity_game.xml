@@ -18,11 +18,11 @@
         
      <TextView
          android:id="@+id/TextTeam"
-         android:layout_width="174dp"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:text="@string/your_turn"
-         android:textColor="#000000"
-         android:textSize="20sp" />
+         android:textColor="#0000FF"
+         android:textSize="18sp" />
      
      </LinearLayout>
      
@@ -446,8 +446,12 @@
          		android:layout_gravity="left"
          		android:layout_below="@+id/scor_juc" />
      	</RelativeLayout>
-       
-     
+
+         <Button
+             android:id="@+id/but_go"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:text="--GO->" />
          
      </LinearLayout>
      

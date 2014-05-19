@@ -27,7 +27,6 @@ public class GameActivity extends Activity {
 	List<Integer> myPlane;
 	List<Integer> serverPlane;
 	List<Integer> pushedButtons;
-	private boolean myTurn = true;
 	private Integer myScore = 0;
 	private Integer serverScore = 0;
 	
@@ -165,7 +164,18 @@ public class GameActivity extends Activity {
 			but.setBackgroundColor(Color.GREEN);
 			TextView mScore = (TextView)findViewById(R.id.scor_juc);
 			myScore++;
-	    	mScore.setText("Your Score: " + myScore);
+			if (myScore == 6){
+				mScore.setText("Congrats ! YOU WIN !");
+				mScore.setTextColor(Color.GREEN);
+				disableButtons();
+				TextView turn = (TextView)findViewById(R.id.TextTeam);
+				turn.setText("Congrats ! YOU WIN !");
+				turn.setTextColor(Color.GREEN);
+				Button but_go = (Button)findViewById(R.id.but_go);
+				but_go.setVisibility(View.VISIBLE);
+			}
+			else
+				mScore.setText("Your Score: " + myScore);
 	    	
 			new Hit().execute("H".concat(idBut), null, null);
 		}
@@ -178,7 +188,8 @@ public class GameActivity extends Activity {
     		new Hit().execute("M".concat(idBut), null, null);
     		disableButtons();
     		TextView turn = (TextView)findViewById(R.id.TextTeam);
-	    	turn.setText("Oponnent turn");
+	    	turn.setText("OPPONENT TURN ! Please wait...");
+	    	turn.setTextColor(Color.RED);
     		new Receive().execute(null, null, null);
 		}
 	}
@@ -220,7 +231,9 @@ public class GameActivity extends Activity {
 			if (action.equals("M")) {
 				enableSomeButtons();
 				TextView turn = (TextView)findViewById(R.id.TextTeam);
-		    	turn.setText("Your turn");
+		    	turn.setText("IT'S YOUR TURN !");
+		    	turn.setTextColor(Color.BLUE);
+		    	
 			}
 			else {
 				int id = getResources().getIdentifier("but".concat(progress[0]), "id", getPackageName());
@@ -228,7 +241,12 @@ public class GameActivity extends Activity {
 				but.setBackgroundColor(Color.RED);
 				TextView oScore = (TextView)findViewById(R.id.scor_opp);
 				serverScore++;
-		    	oScore.setText("Oponnent Score: " + serverScore);
+				if (serverScore == 6){
+					oScore.setText("Sorry, You lost...");
+					oScore.setTextColor(Color.RED);
+				}
+				else
+					oScore.setText("Opponnent Score: " + serverScore);
 			}
 		}
 	}

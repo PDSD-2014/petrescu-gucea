@@ -27,7 +27,6 @@ public class GameActivity extends Activity {
 	List<Integer> myPlane;
 	List<Integer> clientPlane;
 	List<Integer> pushedButtons;
-	private boolean myTurn = true;
 	private Integer myScore = 0;
 	private Integer clientScore = 0;
 	
@@ -83,18 +82,8 @@ public class GameActivity extends Activity {
     		Button but = (Button)findViewById(id);
     		but.setEnabled(false);
     		TextView turn = (TextView)findViewById(R.id.TextTeam);
-	    	turn.setText("Oponnent turn");
-		}
-	}
-	
-	private void enableAllButtons() {
-		for (Integer i = 1; i < 37; i++) {
-			int id = getResources().getIdentifier("but".concat(i.toString()), "id", getPackageName());
-    		Button but = (Button)findViewById(id);
-    		but.setEnabled(true);
-    		TextView turn = (TextView)findViewById(R.id.TextTeam);
-	    	turn.setText("Your turn");
-	    	
+	    	turn.setText("OPPONENT TURN ! Please wait...");
+	    	turn.setTextColor(Color.RED);
 		}
 	}
 	
@@ -107,7 +96,8 @@ public class GameActivity extends Activity {
     		else
     			but.setEnabled(false);
     		TextView turn = (TextView)findViewById(R.id.TextTeam);
-	    	turn.setText("Your turn");
+	    	turn.setText("IT'S YOUR TURN !");
+	    	turn.setTextColor(Color.BLUE);
 		}
 	}
 	
@@ -116,7 +106,7 @@ public class GameActivity extends Activity {
 		String idBut = idAsString.substring(idAsString.length() - 2);
 		if (idBut.getBytes()[0] == 't')
 			idBut = idBut.substring(1);
-		Log.i("apsat: ", idBut);
+		Log.i("apasat: ", idBut);
 		
 		int id = getResources().getIdentifier("but".concat(idBut), "id", getPackageName());
 		Button but = (Button)findViewById(id);
@@ -131,7 +121,18 @@ public class GameActivity extends Activity {
 			but.setBackgroundColor(Color.GREEN);
 			TextView mScore = (TextView)findViewById(R.id.scor_juc);
 			myScore++;
-	    	mScore.setText("Your Score: " + myScore);
+			if (myScore == 6){
+				mScore.setText("Congrats ! YOU WIN !");
+				mScore.setTextColor(Color.GREEN);
+				disableButtons();
+				TextView turn = (TextView)findViewById(R.id.TextTeam);
+				turn.setText("Congrats ! YOU WIN !");
+				turn.setTextColor(Color.GREEN);
+				Button but_go = (Button)findViewById(R.id.but_go);
+				but_go.setVisibility(View.VISIBLE);
+			}
+			else
+				mScore.setText("Your Score: " + myScore);
 	    	
 			new Hit().execute("H".concat(idBut), null, null);
 		}
@@ -249,7 +250,12 @@ public class GameActivity extends Activity {
 				but.setBackgroundColor(Color.RED);
 				TextView oScore = (TextView)findViewById(R.id.scor_opp);
 				clientScore++;
-		    	oScore.setText("Oponnent Score: " + clientScore);
+				if (clientScore == 6){
+					oScore.setText("Sorry, You lost...");
+					oScore.setTextColor(Color.RED);
+				}
+				else
+					oScore.setText("Oponnent Score: " + clientScore);
 			}
 		}
 	}
