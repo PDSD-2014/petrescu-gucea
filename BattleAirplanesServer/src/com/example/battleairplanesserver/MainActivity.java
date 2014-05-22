@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -20,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	private Socket clientSocket;
+	private volatile Socket clientSocket;
 	private TextView textView;
 	private Button startGameButton;
 	private ServerSocket in;

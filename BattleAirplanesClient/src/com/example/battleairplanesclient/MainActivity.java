@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.content.Intent;
 
 public class MainActivity extends Activity {
-	private Socket serverSocket;
+	private volatile Socket serverSocket;
 	private EditText editText;
 	private TextView textView; 
 	private Button startGameButton;

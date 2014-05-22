@@ -1,7 +1,6 @@
 package com.example.battleairplanesserver;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -124,14 +123,6 @@ public class GameActivity extends Activity {
 			TextView mScore = (TextView)findViewById(R.id.scor_juc);
 			myScore++;
 			if (myScore == 6){
-//				mScore.setText("Congrats ! YOU WIN !");
-//				mScore.setTextColor(Color.GREEN);
-//				disableButtons();
-//				TextView turn = (TextView)findViewById(R.id.TextTeam);
-//				turn.setText("Congrats ! YOU WIN !");
-//				turn.setTextColor(Color.GREEN);
-//				Button but_go = (Button)findViewById(R.id.but_go);
-//				but_go.setVisibility(View.VISIBLE);
 				Intent intent = new Intent(this, GameOverActivity.class);
 				intent.putExtra("win", true);
 				startActivity(intent);
@@ -291,8 +282,6 @@ public class GameActivity extends Activity {
 				TextView oScore = (TextView)findViewById(R.id.scor_opp);
 				clientScore++;
 				if (clientScore == 6){
-//					oScore.setText("Sorry, You lost...");
-//					oScore.setTextColor(Color.RED);
 					Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
 					intent.putExtra("win", false);
 					startActivity(intent);

@@ -1,7 +1,6 @@
 package com.example.battleairplanesclient;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -262,8 +261,7 @@ public class GameActivity extends Activity {
 				TextView oScore = (TextView)findViewById(R.id.scor_opp);
 				serverScore++;
 				if (serverScore == 6){
-//					oScore.setText("Sorry, You lost...");
-//					oScore.setTextColor(Color.RED);
+										
 					Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
 					intent.putExtra("win", false);
 					startActivity(intent);
