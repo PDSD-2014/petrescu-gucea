@@ -1,13 +1,21 @@
 package com.example.battleairplanesserver;
 
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class GameOverActivity extends Activity {
 
@@ -20,6 +28,74 @@ public class GameOverActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    Boolean win = extras.getBoolean("win");
+		    extras.remove("win");
+		    ImageView winImage = (ImageView) findViewById(R.id.win);
+		    if (win == true) {
+		    	 winImage.setImageDrawable(getResources().getDrawable(R.drawable.win));
+		    }
+		    else
+		    	winImage.setImageDrawable(getResources().getDrawable(R.drawable.game_over));
+		}
+	}
+	
+	public void replay(View view) {
+		Log.i("Buton", "Replay");
+		new Replay().execute(null, null, null);
+	}
+	
+	private class Replay extends AsyncTask<Void, Void, Void> {
+		private final static String TAG = "ServerThread";
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			Log.i(TAG, "Replay");
+			Socket socket = MainActivity.SocketConnection.getSocket();
+			try {
+				PrintStream writer = new PrintStream(socket.getOutputStream());
+				writer.println("replay");
+				Intent intent = new Intent(GameOverActivity.this, GameActivity.class);
+				intent.putExtra("newGame", true);
+				startActivity(intent);
+			} catch (IOException e) {
+				Log.e("writing to socket", "error while sending replay");
+				return null;
+			}
+			
+			return null;
+		}
+		
+	}
+	
+	public void quit(View view) {
+		Log.i("Buton", "Quit");
+		new QuitGame().execute(null, null, null);
+	}
+	
+	private class QuitGame extends AsyncTask<Void, Void, Void> {
+		private final static String TAG = "ServerThread";
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			Log.i(TAG, "Quit");
+			Socket socket = MainActivity.SocketConnection.getSocket();
+			try {
+				PrintStream writer = new PrintStream(socket.getOutputStream());
+				writer.println("quit");
+				socket.close();
+				Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
+				startActivity(intent);
+			} catch (IOException e) {
+				Log.e("writing to socket", "error while sending quit");
+				return null;
+			}
+			
+			return null;
+		}
+		
 	}
 
 	@Override

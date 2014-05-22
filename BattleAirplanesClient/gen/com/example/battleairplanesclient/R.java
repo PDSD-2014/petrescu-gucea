@@ -25,6 +25,7 @@ public final class R {
         public static final int game_over=0x7f020000;
         public static final int ic_launcher=0x7f020001;
         public static final int logo=0x7f020002;
+        public static final int win=0x7f020003;
     }
     public static final class id {
         public static final int ButStartGame=0x7f08002c;
@@ -68,11 +69,11 @@ public final class R {
         public static final int but7=0x7f080008;
         public static final int but8=0x7f080009;
         public static final int but9=0x7f08000a;
-        public static final int but_go=0x7f080028;
         public static final int container=0x7f080000;
         public static final int logo=0x7f080029;
         public static final int scor_juc=0x7f080026;
         public static final int scor_opp=0x7f080027;
+        public static final int win=0x7f080028;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;

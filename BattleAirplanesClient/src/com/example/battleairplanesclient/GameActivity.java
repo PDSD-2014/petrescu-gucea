@@ -11,6 +11,7 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -77,7 +78,7 @@ public class GameActivity extends Activity {
 	}
 	
 	private class Game extends AsyncTask<Void, Void, Void> {
-		private final static String TAG = "ServerThread";
+		private final static String TAG = "ClientThread";
 		
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -95,18 +96,24 @@ public class GameActivity extends Activity {
 				String line;
 				for (int i = 0; i < 6; i++) {
 					line = responseReader.readLine();
-					Log.i("server received position: ", line);
+					Log.i("client received position: ", line);
 					serverPlane.add(Integer.parseInt(line));
 				}
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("writing to socket", "error while sending/receiving plane position");
+				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				startActivity(intent);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				return null;
 			}
 			
 			return null;
-		}
-		
+		}	
 	}
 
 	@Override
@@ -144,6 +151,10 @@ public class GameActivity extends Activity {
 		}
 	}
 	
+	public void quit(View View) {
+		new Hit().execute("Q".concat("Game"), null, null);	
+	}
+	
 	public void hit(View view) {
 		String idAsString = view.getResources().getResourceName(view.getId());
 		String idBut = idAsString.substring(idAsString.length() - 2);
@@ -164,20 +175,20 @@ public class GameActivity extends Activity {
 			but.setBackgroundColor(Color.GREEN);
 			TextView mScore = (TextView)findViewById(R.id.scor_juc);
 			myScore++;
-			if (myScore == 6){
-				mScore.setText("Congrats ! YOU WIN !");
-				mScore.setTextColor(Color.GREEN);
-				disableButtons();
-				TextView turn = (TextView)findViewById(R.id.TextTeam);
-				turn.setText("Congrats ! YOU WIN !");
-				turn.setTextColor(Color.GREEN);
-				Button but_go = (Button)findViewById(R.id.but_go);
-				but_go.setVisibility(View.VISIBLE);
+			if (myScore == 6) {
+				Intent intent = new Intent(this, GameOverActivity.class);
+				Log.i("client win", "win");
+				intent.putExtra("win", true);
+				startActivity(intent);
 			}
 			else
 				mScore.setText("Your Score: " + myScore);
 	    	
-			new Hit().execute("H".concat(idBut), null, null);
+			Log.i("HIT", "client");
+			if (myScore == 6)
+				new Hit().execute("W".concat(idBut), null, null);
+			else
+				new Hit().execute("H".concat(idBut), null, null);
 		}
 		else {
 			if (myPlane.contains(Integer.parseInt(idBut))) 
@@ -195,11 +206,11 @@ public class GameActivity extends Activity {
 	}
 	
 	private class Receive extends AsyncTask<Void, String, Void> {
-		private final static String TAG = "ServerThread";
+		private final static String TAG = "ClientThread";
 		
 		@Override
 		protected Void doInBackground(Void... params) {
-			Log.e(TAG, "Receive doInBackground");
+			Log.i(TAG, "Receive doInBackground");
 			Socket socket = MainActivity.SocketConnection.getSocket();
 			try {
 				BufferedReader responseReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -213,13 +224,22 @@ public class GameActivity extends Activity {
 					}
 					else {
 						String id = line.substring(1);
-						Log.i("server received command: ", line);
+						Log.i("client received command: ", line);
 						publishProgress(id);
+						if (line.substring(0,1).equals("W"))
+							break;
 					}
 				}
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("writing to socket", "error receiving Hit");
+				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				startActivity(intent);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				return null;
 			}
 			
@@ -242,8 +262,11 @@ public class GameActivity extends Activity {
 				TextView oScore = (TextView)findViewById(R.id.scor_opp);
 				serverScore++;
 				if (serverScore == 6){
-					oScore.setText("Sorry, You lost...");
-					oScore.setTextColor(Color.RED);
+//					oScore.setText("Sorry, You lost...");
+//					oScore.setTextColor(Color.RED);
+					Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
+					intent.putExtra("win", false);
+					startActivity(intent);
 				}
 				else
 					oScore.setText("Opponnent Score: " + serverScore);
@@ -251,7 +274,7 @@ public class GameActivity extends Activity {
 		}
 	}
 	private class Hit extends AsyncTask<String, Void, Void> {
-		private final static String TAG = "ServerThread";
+		private final static String TAG = "ClientThread";
 		
 		@Override
 		protected Void doInBackground(String... params) {
@@ -261,9 +284,26 @@ public class GameActivity extends Activity {
 				PrintStream writer = new PrintStream(socket.getOutputStream());
 				writer.println(params[0]);
 				Log.i("Hit: client sending position: ", params[0]);
+				if (params[0].equals("QGame")) {
+					try {
+						MainActivity.SocketConnection.getSocket().close();
+						Intent intent = new Intent(GameActivity.this, MainActivity.class);
+						startActivity(intent);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("writing to socket", "error while sending hit");
+				e.printStackTrace();
+				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				startActivity(intent);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				return null;
 			}
 			

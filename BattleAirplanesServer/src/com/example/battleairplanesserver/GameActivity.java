@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -122,19 +124,25 @@ public class GameActivity extends Activity {
 			TextView mScore = (TextView)findViewById(R.id.scor_juc);
 			myScore++;
 			if (myScore == 6){
-				mScore.setText("Congrats ! YOU WIN !");
-				mScore.setTextColor(Color.GREEN);
-				disableButtons();
-				TextView turn = (TextView)findViewById(R.id.TextTeam);
-				turn.setText("Congrats ! YOU WIN !");
-				turn.setTextColor(Color.GREEN);
-				Button but_go = (Button)findViewById(R.id.but_go);
-				but_go.setVisibility(View.VISIBLE);
+//				mScore.setText("Congrats ! YOU WIN !");
+//				mScore.setTextColor(Color.GREEN);
+//				disableButtons();
+//				TextView turn = (TextView)findViewById(R.id.TextTeam);
+//				turn.setText("Congrats ! YOU WIN !");
+//				turn.setTextColor(Color.GREEN);
+//				Button but_go = (Button)findViewById(R.id.but_go);
+//				but_go.setVisibility(View.VISIBLE);
+				Intent intent = new Intent(this, GameOverActivity.class);
+				intent.putExtra("win", true);
+				startActivity(intent);
 			}
 			else
 				mScore.setText("Your Score: " + myScore);
 	    	
-			new Hit().execute("H".concat(idBut), null, null);
+			if (myScore == 6)
+				new Hit().execute("W".concat(idBut), null, null);
+			else 
+				new Hit().execute("H".concat(idBut), null, null);
 		}
 		else {
 			if (myPlane.contains(Integer.parseInt(idBut))) 
@@ -159,10 +167,18 @@ public class GameActivity extends Activity {
 			try {
 				PrintStream writer = new PrintStream(socket.getOutputStream());
 					writer.println(params[0]);
-					Log.i("client sending position: ", params[0]);
+					Log.i("server sending position: ", params[0]);
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("writing to socket", "error while sending hit");
+				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				intent.putExtra("quit", true);
+				startActivity(intent);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				return null;
 			}
 			
@@ -195,8 +211,16 @@ public class GameActivity extends Activity {
 					Log.i("server sending position: ", myPlane.get(i).toString());
 				}
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("writing to socket", "error while sending/reciving plane position");
+				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				intent.putExtra("quit", true);
+				startActivity(intent);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				return null;
 			}
 			
@@ -224,15 +248,31 @@ public class GameActivity extends Activity {
 						publishProgress("M");
 						break;
 					}
+					else if (line.getBytes()[0] == 'Q') {
+						socket.close();
+						Intent intent = new Intent(GameActivity.this, MainActivity.class);
+						startActivity(intent);
+						break;
+					}
 					else {
 						String id = line.substring(1);
 						Log.i("server received command: ", line);
 						publishProgress(id);
+						if (line.substring(0,1).equals("W"))
+							break;
 					}
 				}
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("writing to socket", "error receiving Hit");
+				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				intent.putExtra("quit", true);
+				startActivity(intent);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				return null;
 			}
 			
@@ -251,8 +291,11 @@ public class GameActivity extends Activity {
 				TextView oScore = (TextView)findViewById(R.id.scor_opp);
 				clientScore++;
 				if (clientScore == 6){
-					oScore.setText("Sorry, You lost...");
-					oScore.setTextColor(Color.RED);
+//					oScore.setText("Sorry, You lost...");
+//					oScore.setTextColor(Color.RED);
+					Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
+					intent.putExtra("win", false);
+					startActivity(intent);
 				}
 				else
 					oScore.setText("Oponnent Score: " + clientScore);

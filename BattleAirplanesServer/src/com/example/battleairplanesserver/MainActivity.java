@@ -23,18 +23,21 @@ public class MainActivity extends Activity {
 	private Socket clientSocket;
 	private TextView textView;
 	private Button startGameButton;
+	private ServerSocket in;
 	
-	private class WaitForClient extends AsyncTask<Void, Void, Void> {
-		private ServerSocket in;
+	private class WaitForClient extends AsyncTask<Integer, Void, Void> {
+		
 		private final static String TAG = "ServerThread";
 		
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected Void doInBackground(Integer... params) {
 			Log.e(TAG, "doInBackground");
-			try {
-				in = new ServerSocket(9000);
-			} catch (IOException e) {
-				Log.e(TAG, "Cannnot create socket. Due to: " + e.getMessage());
+			if (params[0] == 0) {
+				try {
+					in = new ServerSocket(9000);
+				} catch (IOException e) {
+					Log.e(TAG, "Cannnot create socket. Due to: " + e.getMessage());
+				}
 			}
 			
 			try {
@@ -42,8 +45,9 @@ public class MainActivity extends Activity {
 					Log.d(TAG, "New request from: " + clientSocket.getInetAddress());
 					SocketConnection.setSocket(clientSocket);
 					publishProgress((Void)null);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e(TAG, "Error when accepting connection");
+				e.printStackTrace();
 			}
 			
 			return null;
@@ -92,8 +96,23 @@ public class MainActivity extends Activity {
 		startGameButton = (Button)findViewById(R.id.ButStartGame);
 		startGameButton.setVisibility(View.INVISIBLE);
 		textView = (TextView)findViewById(R.id.MessageToEntertext);
-		new WaitForClient().execute(null, null, null);
+		if (clientSocket != null)  {
+			try {
+				clientSocket.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
+		if (in != null)  {
+			try {
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		new WaitForClient().execute(0, null, null);
 	}
 
 	@Override

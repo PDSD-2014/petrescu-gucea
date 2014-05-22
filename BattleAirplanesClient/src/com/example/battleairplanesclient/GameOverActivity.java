@@ -1,13 +1,24 @@
 package com.example.battleairplanesclient;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class GameOverActivity extends Activity {
 
@@ -20,6 +31,55 @@ public class GameOverActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    Boolean win = extras.getBoolean("win");
+		    extras.remove("win");
+		    ImageView winImage = (ImageView) findViewById(R.id.win);
+		    if (win == true) {
+		    	 winImage.setImageDrawable(getResources().getDrawable(R.drawable.win));
+		    }
+		    else
+		    	winImage.setImageDrawable(getResources().getDrawable(R.drawable.game_over));
+		}
+		new WaitCommand().execute(null, null, null);
+	}
+	
+	private class WaitCommand extends AsyncTask<Void, Void, Void> {
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			Socket socket = MainActivity.SocketConnection.getSocket();
+			try {
+				BufferedReader responseReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				String line = responseReader.readLine();
+				Log.i("wait command", line);
+				if (line.equals("replay")) {
+					Intent intent = new Intent(GameOverActivity.this, GameActivity.class);
+					intent.putExtra("newGame", true);
+					startActivity(intent);
+				}
+				else if (line.equals("quit")) {
+					Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
+					socket.close();
+					startActivity(intent);
+				}
+				
+//				PrintStream writer = new PrintStream(socket.getOutputStream());
+//				for (int i = 0; i < 6; i++) {
+//					writer.println(myPlane.get(i));
+//					Log.i("server sending position: ", myPlane.get(i).toString());
+//				}
+				
+			} catch (IOException e) {
+				Log.e("writing to socket", "error while waiting for command");
+				return null;
+			}
+			
+			return null;
+		}
+		
 	}
 
 	@Override
