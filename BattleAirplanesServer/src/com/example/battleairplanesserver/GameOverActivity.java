@@ -73,6 +73,9 @@ public class GameOverActivity extends Activity {
 	public void quit(View view) {
 		Log.i("Buton", "Quit");
 		new QuitGame().execute(null, null, null);
+		
+		android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
 	}
 	
 	private class QuitGame extends AsyncTask<Void, Void, Void> {
@@ -86,8 +89,8 @@ public class GameOverActivity extends Activity {
 				PrintStream writer = new PrintStream(socket.getOutputStream());
 				writer.println("quit");
 				socket.close();
-				Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
-				startActivity(intent);
+				//Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
+				//startActivity(intent);
 			} catch (IOException e) {
 				Log.e("writing to socket", "error while sending quit");
 				return null;

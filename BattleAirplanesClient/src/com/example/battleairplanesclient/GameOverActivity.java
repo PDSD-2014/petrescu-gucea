@@ -62,15 +62,16 @@ public class GameOverActivity extends Activity {
 					socket.close();
 					startActivity(intent);
 				}
-				
-//				PrintStream writer = new PrintStream(socket.getOutputStream());
-//				for (int i = 0; i < 6; i++) {
-//					writer.println(myPlane.get(i));
-//					Log.i("server sending position: ", myPlane.get(i).toString());
-//				}
-				
-			} catch (IOException e) {
+								
+			} catch (Exception e) {
 				Log.e("writing to socket", "error while waiting for command");
+				Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
+				try {
+					MainActivity.SocketConnection.getSocket().close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}				
+				startActivity(intent);
 				return null;
 			}
 			

@@ -34,7 +34,7 @@
         android:layout_width="285dp"
         android:layout_height="67dp"
         android:onClick="quit"
-        android:text="Quit Game" />
+        android:text="NEW GAME" />
     
     
 
