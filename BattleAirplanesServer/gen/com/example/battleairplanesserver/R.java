@@ -97,6 +97,7 @@ public final class R {
         public static final int opp_score=0x7f05000a;
         public static final int opponent_ip_complete_message=0x7f050006;
         public static final int opponent_turn=0x7f050008;
+        public static final int start_game=0x7f05000c;
         public static final int title_activity_game=0x7f050003;
         public static final int title_activity_game_over=0x7f050004;
         public static final int waiting=0x7f05000b;

@@ -23,6 +23,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
         android:text="@string/Team"
+        android:textColor="#0000FF"
         android:textSize="20sp" />
 
     <GridLayout
@@ -39,14 +40,14 @@
 
         <TextView
             android:id="@+id/MessageToEntertext"
-            android:layout_width="201dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_gravity="center"
             android:layout_row="4"
             android:text="@string/waiting"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
+        
     </GridLayout>
 
   	 <Button
@@ -54,7 +55,7 @@
         android:layout_width="285dp"
         android:layout_height="67dp"
         android:onClick="sendMessage"
-        android:text="START GAME" />
+        android:text="@string/start_game" />
 
 </LinearLayout>
 

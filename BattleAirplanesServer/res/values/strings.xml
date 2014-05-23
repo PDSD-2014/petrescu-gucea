@@ -8,8 +8,9 @@
     <string name="title_activity_game_over">MainActivity</string>
     <string name="Team">Miracle Team</string>
     <string name="opponent_ip_complete_message">Complete opponent\'s IP and click <b>Start Game</b>: </string>
-    <string name="your_turn">Oponent turn</string><string name="opponent_turn">It\'s opponent turn&#8230;WAIT !</string>
+    <string name="your_turn">Opponent turn</string><string name="opponent_turn">It\'s opponent turn&#8230;WAIT !</string>
     <string name="your_score">Your score: </string>
     <string name="opp_score">Opponent score: </string>
-    <string name="waiting">Waiting for client... </string>
+    <string name="waiting">Waiting for client&#8230; </string>
+    <string name="start_game">START GAME</string>
 </resources>

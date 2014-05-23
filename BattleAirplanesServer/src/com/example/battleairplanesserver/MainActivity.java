@@ -7,8 +7,10 @@ import java.net.Socket;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,16 +26,21 @@ public class MainActivity extends Activity {
 	private Button startGameButton;
 	private ServerSocket in;
 	
-	private class WaitForClient extends AsyncTask<Integer, Void, Void> {
-		
+	
+	private class WaitForClient extends AsyncTask<Integer, Integer, Void> {
+		public String ip;
 		private final static String TAG = "ServerThread";
 		
+		@SuppressWarnings("deprecation")
 		@Override
 		protected Void doInBackground(Integer... params) {
 			Log.e(TAG, "doInBackground");
 			if (params[0] == 0) {
 				try {
 					in = new ServerSocket(9000);
+					 WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+					 ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+					publishProgress(1);
 				} catch (IOException e) {
 					Log.e(TAG, "Cannnot create socket. Due to: " + e.getMessage());
 				}
@@ -43,7 +50,7 @@ public class MainActivity extends Activity {
 				clientSocket = in.accept();
 					Log.d(TAG, "New request from: " + clientSocket.getInetAddress());
 					SocketConnection.setSocket(clientSocket);
-					publishProgress((Void)null);
+					publishProgress(0);
 			} catch (Exception e) {
 				Log.e(TAG, "Error when accepting connection");
 				e.printStackTrace();
@@ -52,11 +59,20 @@ public class MainActivity extends Activity {
 			return null;
 		}
 		
-		 protected void onProgressUpdate(Void... progress) {
-	         textView.setText("New connection: " + clientSocket.getInetAddress().toString().substring(1) + ":" + 
-	        		 			clientSocket.getPort());
-	         startGameButton.setVisibility(View.VISIBLE);
+		 protected void onProgressUpdate(Integer... progress) {
+			 if (progress[0] == 0) {
+				 
+				 textView.setText("New connection: " + clientSocket.getInetAddress().toString().substring(1) + ":" + 
+	        		 				clientSocket.getPort());
+				 startGameButton.setVisibility(View.VISIBLE);
+			 }
+			 else {
+				 textView.setText("Your Ip is: " + ip);
+			 }
+				 
 	     }
+		 
+		 
 	}
 	
 	/** Called when the user clicks the Start Game button */
